@@ -1,35 +1,21 @@
 #include <stdio.h>
-#include "test.h"
+#include <stdlib.h>
 
-
-//void showString(void);
-
-int main()
+int main(void)
 {
 
-int i, j;
-char lemon[5] = {'A', 'B', 'C', 'D', 'E'};
-int arr[10]={9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
+int arr[5], i, j;
 
-for(i= 0; i<9; i++)
+
+for(i=0; i<5; i++)
 {
- for(j = i+1; j<10; j++)
-   {
-     if(arr[i] > arr[j])
-       {
-         Swap(&arr[i], &arr[j]);
-       }
-   }
-
+printf("please enter your %d item \n", i+1);
+scanf("%d", &arr[i] );
 }
 
-for(i=0; i<10; i++)
-{
-  printf("%d, ", arr[i]);
-}
+for(i=0; i<5; i++)
+printf("%d item = %d\n", i+1, arr[i]);
 
-
-showString();
 
 return 0;
 }
