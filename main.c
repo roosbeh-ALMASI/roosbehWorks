@@ -21,7 +21,7 @@ float grade;
 
 };
 
-
+void ProcessStructure(struct apple var);
 
 //-------------------------------------------
 
@@ -35,5 +35,20 @@ ptr = &lemon;
 printf("%s\n", lemon.bobo.postCode );
 printf("%s\n", ptr->name);
 printf("%s\n", ptr->bobo.street);
+
+ProcessStructure(lemon);
+
+printf("new street name : %s\n", ptr->name);
+
 return 0;
 }
+
+
+void ProcessStructure(struct apple var)
+{
+  printf("enter your new street name pls\n");
+  gets(var.name);  
+  
+}
+
+
