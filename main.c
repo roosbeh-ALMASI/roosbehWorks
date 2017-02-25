@@ -2,39 +2,40 @@
 #include <stdlib.h>
 #include <string.h>
 
-
-void showoff(int argc, char *argv)
+int main()
 {
-   int i = 0;
-   while(*(argv+i) != '\0')
-    {
-       printf("%c, ", *(argv+i));
-       i++;
-    }
-   
+int i;
+
+char karak[8] = "Roosbeh";
+int  adad[] = {1,2, 3, 4, 5};
+float flower[] = {1.5, 2.5, 3.5, 4.5, 5.5};
+
+void *ptr;
+char *p;
+unsigned char index;
+
+//--------------- Void Pointer -------------------------
+
+ptr = (void *)karak;
+
+for(i=0; i<8; i++)
+{
+  printf("at %p = %c\n", ptr, *((char *)ptr));
+  ptr = (void *)((char *)ptr+1);
 }
 
-void stor(char *argv);
 
+//----------------- cast non void   ---------------
 
-
-
-
-//------------------------------------------
-
-int main(void)
+p = (char *)flower;
+for(i=0; i<5; i++)
 {
-  int i;
-  char arr[] ="roosbeh almasi";
-   
-  for(i = 0; i<15; i++)
-     {
-       if(arr[i] == 0x20 || arr[i] == '\0')
-         {
-          printf("\n");
-         }
-       printf("%x, ", arr[i]);
-     }
+
+printf("at %p = %f\n", p , *((float *)p));
+p = (char *)((float *)p+1);
+}
+
+  return 0;
 
 }
 
