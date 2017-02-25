@@ -1,38 +1,34 @@
+/*  
+                   storage class in c
+              auto,  register, static, extern
+
+  1. location   , where in memory is going to be stored (mainMemory/CPU register)
+  2. lifetime   , how long the piece of memory will be allocated to the variable
+  3. scope      , auto = register= static = local,  extern = global 
+  4. default-initial-value  auto = register =  garbageValue. static= extern = 0
+
+    storageClass dataType Variable = Value;
+
+*/
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
 #include <math.h>
 
-
-int *func(void);
-void funky(int* (*jocker)(void));
+extern void functwo(void);
+extern char apple; 
+//---------------------------------
 
 int main()
 {
- funky(&func);
 
-}
-
-//---------------------------------------------------------
-
-
-int *func(void)
-{
+ 
+    printf("%c\n", apple);
   
-  static int arr[5] = {1, 2, 3, 4, 5};
 
-  return arr;
-}
+ return 0;
 
-void funky(int* (*jocker)())
-{
-  int *ptr;
-  int i;
-  ptr = jocker();
-  for(i=0; i<5; i++)
-     {
-       printf("item %d is at %p = %d\n", i+1, ptr+i, *(ptr+i));
-     }
-       
 }
