@@ -1,42 +1,39 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
+
+struct apple{
+
+char name[20];
+char surename[20];
+uint16_t age;    // unsigned short
+float grade;
+
+
+   struct{
+   
+          int houseNum;
+          char street[50];
+          char postCode[10];  
+ 
+         }bobo;
+
+};
+
+
+
+//-------------------------------------------
 
 int main()
 {
-int i;
 
-char karak[8] = "Roosbeh";
-int  adad[] = {1,2, 3, 4, 5};
-float flower[] = {1.5, 2.5, 3.5, 4.5, 5.5};
+struct apple lemon = {"roosbeh", "almasi", 35, 2.1, 19, "tichborne", "TW167NU"};
+struct apple *ptr;
+ptr = &lemon;
 
-void *ptr;
-char *p;
-unsigned char index;
-
-//--------------- Void Pointer -------------------------
-
-ptr = (void *)karak;
-
-for(i=0; i<8; i++)
-{
-  printf("at %p = %c\n", ptr, *((char *)ptr));
-  ptr = (void *)((char *)ptr+1);
+printf("%s\n", lemon.bobo.postCode );
+printf("%s\n", ptr->name);
+printf("%s\n", ptr->bobo.street);
+return 0;
 }
-
-
-//----------------- cast non void   ---------------
-
-p = (char *)flower;
-for(i=0; i<5; i++)
-{
-
-printf("at %p = %f\n", p , *((float *)p));
-p = (char *)((float *)p+1);
-}
-
-  return 0;
-
-}
-
-
