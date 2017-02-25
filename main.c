@@ -2,53 +2,31 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
-
-struct apple{
-
-char name[20];
-char surename[20];
-uint16_t age;    // unsigned short
-float grade;
+#include <math.h>
 
 
-   struct{
-   
-          int houseNum;
-          char street[50];
-          char postCode[10];  
- 
-         }bobo;
+void first();
+void executeFirst(void (*f)());
 
-};
 
-void ProcessStructure(struct apple var);
-
-//-------------------------------------------
-
-int main()
+int main(void)
 {
 
-struct apple lemon = {"roosbeh", "almasi", 35, 2.1, 19, "tichborne", "TW167NU"};
-struct apple *ptr;
-ptr = &lemon;
-
-printf("%s\n", lemon.bobo.postCode );
-printf("%s\n", ptr->name);
-printf("%s\n", ptr->bobo.street);
-
-ProcessStructure(lemon);
-
-printf("new street name : %s\n", ptr->name);
+executeFirst(&first);
+ 
 
 return 0;
 }
 
-
-void ProcessStructure(struct apple var)
+void first()
 {
-  printf("enter your new street name pls\n");
-  gets(var.name);  
-  
+
+ printf("this is the first function\n");
+
 }
 
+void executeFirst(void (*f)())
+{
+  f();
+}
 
