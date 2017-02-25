@@ -5,28 +5,34 @@
 #include <math.h>
 
 
-void first();
-void executeFirst(void (*f)());
+int *func(void);
+void funky(int* (*jocker)(void));
 
-
-int main(void)
+int main()
 {
-
-executeFirst(&first);
- 
-
-return 0;
-}
-
-void first()
-{
-
- printf("this is the first function\n");
+ funky(&func);
 
 }
 
-void executeFirst(void (*f)())
+//---------------------------------------------------------
+
+
+int *func(void)
 {
-  f();
+  
+  static int arr[5] = {1, 2, 3, 4, 5};
+
+  return arr;
 }
 
+void funky(int* (*jocker)())
+{
+  int *ptr;
+  int i;
+  ptr = jocker();
+  for(i=0; i<5; i++)
+     {
+       printf("item %d is at %p = %d\n", i+1, ptr+i, *(ptr+i));
+     }
+       
+}
