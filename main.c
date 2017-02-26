@@ -1,50 +1,30 @@
-/*      Macros             */
-/*     Careful! macro is like a copy of what you type using your keyboard */
-/*     declare marcors as global variables or before being used by anything*/
-
+/*                  function Macros             */
 
 #include <stdio.h>
-#include <stdlib.h>
 
-#define     __WELCOME__       printf("Welcome to the world of C...!\n");
-#define     __CON__           (i>j)
-#define     __CALCULATE__     (((x * 2) + 3))
-//#define     x    4           // works
-#define      i     20
-#define      j     10
 
-void func(int x, int y);
-int main()
+#define      x               10
+#define      b               15
+#define    __CON1__          (x > b)
+#define    __EXPRESSION__    (k*4)
+#define    __WORDS__ONE__    printf("this is is successful marco\n");
+#define    __WORDS__TWO__    printf("this second successful ....!\n");
+
+/*  macro as function */
+
+#define    __ROOSBEH__FUNC__(num1, num2)       if(__CON1__) { __WORDS__ONE__ } else{__WORDS__TWO__} 
+
+
+
+
+int main(void)
 {
 
+ __ROOSBEH__FUNC__(x, b);  // dont forget ;
 
-//int x = 2;              // works
+#define     k    100
 
-#define    x     6      // works
+printf("\n\n -- %d -- \n\n", __EXPRESSION__);
 
-if(__CON__)
-{
-  __WELCOME__
-}
-
-printf("result from __CALCULATE__ macro = %d\n", __CALCULATE__ );
-
-
-
-//#define    x     7      // it wont work, x defined after calling by if()
-  
-}
-
-
-void func(int n, int m)
-{
-
-
-if(__CON__)
-  {
-    printf("sucessful marco usage!!!\n");
-  }
-
-
-
+ return 0;
 }
