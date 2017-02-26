@@ -1,30 +1,59 @@
-/*                  function Macros             */
+/*   Dynamic memory allocation         */
+
+/*   
+     void   *malloc(size_t size)                  return first add or NULL on fail   
+     void   *calloc(size_t No.item, size_t size)  same as above
+     void   free(void *ptr)                       no return                 
+     unsigned int size_t
+*/
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
 
-
-#define      x               10
-#define      b               15
-#define    __CON1__          (x > b)
-#define    __EXPRESSION__    (k*4)
-#define    __WORDS__ONE__    printf("this is is successful marco\n");
-#define    __WORDS__TWO__    printf("this second successful ....!\n");
-
-/*  macro as function */
-
-#define    __ROOSBEH__FUNC__(num1, num2)       if(__CON1__) { __WORDS__ONE__ } else{__WORDS__TWO__} 
-
-
-
-
-int main(void)
+#define   _ROW_    3
+#define   _COL_    4
+int main()
 {
 
- __ROOSBEH__FUNC__(x, b);  // dont forget ;
 
-#define     k    100
+int i, j;
 
-printf("\n\n -- %d -- \n\n", __EXPRESSION__);
+int matrix[_ROW_][_COL_];
 
- return 0;
+printf("please fill in you matrix\n");
+for(i = 0; i<_ROW_; i++)
+{
+  for(j=0; j<_COL_; j++)
+    { 
+      printf("please enter your %d item of you you %d row\n", j+1, i+1);
+           scanf("%d", &matrix[i][j]);
+      printf("\n"); 
+    }  
 }
+
+printf("thank you..!\n");
+printf("here is you choosen matrix\n");
+printf("-------------------------\n");
+
+for(i=0; i< _ROW_ ; i++)
+{
+  for(j=0; j<_COL_; j++)
+     {
+        printf("%d ", matrix[i][j]);
+     }
+  printf("\n");
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+
