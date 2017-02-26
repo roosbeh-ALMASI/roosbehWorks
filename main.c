@@ -1,34 +1,50 @@
-/*  
-                   storage class in c
-              auto,  register, static, extern
-
-  1. location   , where in memory is going to be stored (mainMemory/CPU register)
-  2. lifetime   , how long the piece of memory will be allocated to the variable
-  3. scope      , auto = register= static = local,  extern = global 
-  4. default-initial-value  auto = register =  garbageValue. static= extern = 0
-
-    storageClass dataType Variable = Value;
-
-*/
+/*      Macros             */
+/*     Careful! macro is like a copy of what you type using your keyboard */
+/*     declare marcors as global variables or before being used by anything*/
 
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <stdint.h>
-#include <math.h>
 
-extern void functwo(void);
-extern char apple; 
-//---------------------------------
+#define     __WELCOME__       printf("Welcome to the world of C...!\n");
+#define     __CON__           (i>j)
+#define     __CALCULATE__     (((x * 2) + 3))
+//#define     x    4           // works
+#define      i     20
+#define      j     10
 
+void func(int x, int y);
 int main()
 {
 
- 
-    printf("%c\n", apple);
-  
 
- return 0;
+//int x = 2;              // works
+
+#define    x     6      // works
+
+if(__CON__)
+{
+  __WELCOME__
+}
+
+printf("result from __CALCULATE__ macro = %d\n", __CALCULATE__ );
+
+
+
+//#define    x     7      // it wont work, x defined after calling by if()
+  
+}
+
+
+void func(int n, int m)
+{
+
+
+if(__CON__)
+  {
+    printf("sucessful marco usage!!!\n");
+  }
+
+
 
 }
