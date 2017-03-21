@@ -20,7 +20,7 @@ void    show(void);
 uint8_t  enQ(char x); 
 uint8_t  deQ(void);
 void menu(void);
-
+void Index(void);
 
 char Q[QSIZE];
 int rear  = -1;
@@ -150,6 +150,7 @@ loop:  printf("\n--------- Q MENU -------------\n");
   printf("3. Dequeue an item\n");
   printf("4. check if Q is full\n");
   printf("5. chack if Q is empty\n");
+  printf("6. show pointer indexes\n");
   printf("Please ur choice\n");
   printf(">> ");
   scanf("%c%*c", &choice);
@@ -169,7 +170,7 @@ loop:  printf("\n--------- Q MENU -------------\n");
 
     case '2':
          printf("insert a char\n");
-         scanf("%c%*c", &ch);
+         scanf("%c%*c", &ch );
          enQ(ch); 
     break;
 
@@ -197,6 +198,11 @@ loop:  printf("\n--------- Q MENU -------------\n");
                      printf("No, the buffer is not empty0");
                  }
     break;
+
+   
+    case '6':
+        Index();
+    break;
          
    default:    
         printf("Entered a wrong charachter");  
@@ -205,12 +211,27 @@ loop:  printf("\n--------- Q MENU -------------\n");
 
   } 
 
-   }
+}
 
+void Index(void)
+{
 
+ int i = 0;
 
+ printf("rear index  ");
+ for(i=0; i<5; i++)
+  {
+    printf("%d ", rear);
+  }  
 
-
+  printf("\nfront index "); 
+ for(i=0; i<5; i++)
+  {
+    printf("%d ", front);   
+  }
+  
+  printf("\n");
+}
 
 
 
