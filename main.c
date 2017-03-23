@@ -7,70 +7,120 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-#define    QSIZE    5
+
+#define    QSIZE    10
+
 
 typedef enum{
 false,
 true
 }bool;
 
-bool isEmpty(void);
-bool  isFull(void);
-void    show(void);
-uint8_t  enQ(char x); 
-uint8_t  deQ(void);
-void menu(void);
-void Index(void);
+
+struct menu{
+char *str;
+int  (*handler)(void);
+};
+
+
+
+
+int     isEmpty(void);
+int     isFull(void);
+int     showQ(void);
+int     indexPointers(void);
+int     displayMenu(void);
+int     exitMenu(void);
+int     deQ(void);
+int     enQ(void); 
+void processChoice(char *ptr);
+
+
+
+struct menu main_menu[7] = {
+
+{"0. Exit the Menu ", exitMenu },
+{"1. Show the availbe items in the Q", showQ},
+{"2. Enqueue an intem ", enQ },
+{"3. Dequeue an intem ", deQ},
+{"4. Check if the Q is empty ", isEmpty},
+{"5. Check if the Q is full ",  isFull},
+{"6. show the position of the front and rear pointers in the Q", indexPointers }
+
+};
+
 
 char Q[QSIZE];
+
 int rear  = -1;
 int front = -1;
+char ch;
+char newItem;
 
 //---------------------------------------
 
 int main(void)
 {
 
+
 while(1)
-       {
-          menu();
-       }
+{
+	displayMenu();
+	printf("make a choice\n");
+	scanf("%c%*c", &ch);
+	processChoice(&ch);
+}
+
 return 0;
 }
 
 //-----------------------------------------
 
 
-uint8_t enQ(char x)
+int exitMenu(void)
 {
-  if(isFull() == true)
+  printf("Goodbye\n");
+   exit(0);
+   return 0;
+}
+
+
+int enQ(void)
+{
+  if(isFull() == 1)
     {
       printf("sorry the Q is full\n");
       return '\0';
       
     }
-  else if(isEmpty() == true)
+  else if(isEmpty() == 1)
     {
+     printf("enter a char to enqueue\n");
+     scanf("%c%*c", &newItem);
        rear = 0;
       front = 0;
-      Q[rear] = x;
-      return '1';
+      Q[rear] = newItem;
+      return 1;
     }
   else
     {
+
+      
+     printf("enter a char to enqueue\n");
+     scanf("%c%*c", &newItem);
       rear = (rear+1) % QSIZE;
-      Q[rear] = x;
-      return '1';
+      Q[rear] = newItem;
+      return 1;
     }
   
 }
 
-uint8_t deQ(void)
+int deQ(void)
 {
 
 char temp = '\0';
 
-  if(isEmpty() == true)
+  if(isEmpty() ==  1)
      {
        printf("Sorry the Q is already empty\n");
        return -1;
@@ -86,41 +136,41 @@ char temp = '\0';
        temp = Q[front];
        front = (front+1)%QSIZE;
      }
-   return temp;
+   return 1;
 }
 
 
-bool isEmpty(void)
+int isEmpty(void)
 {
     if(rear == -1 && front == -1)
        {
-         return true;
+         return 1;
        }
      else
        {
-         return false;
+         return 0;
        }
 }
 
-bool isFull(void)
+int isFull(void)
 {
 
   if(((rear+1)%QSIZE) == front)
     {
-      return true;
+      return 1;
     }
   else
     {
-      return false;
+      return 0;
     }
 }
 
-void show(void)
+int showQ(void)
 {
   int i = 0;
-  int j = 0;
+  
    
-  if(isEmpty() == true)
+  if(isEmpty() == 1)
     {
       printf("Sorry the Q is Empty\n");      
     }
@@ -128,221 +178,132 @@ void show(void)
     {
 
 printf("\n\n---------- available items ----\n");
-       while(front != rear)
+
+i=front;
+
+       while(i != rear)
         {
-          printf("%c,  ", Q[front]);
-          front = (front +1)%QSIZE;
+          printf("%c,  ", Q[i]);
+          i = (i +1)%QSIZE;
         }
        printf("\n\n");
     }
 }
  
 
-void menu(void)
+
+
+int indexPointers(void)
 {
-  char choice; 
-  char ch;
-   
-loop:  printf("\n--------- Q MENU -------------\n");
-  printf("0. Exit the MUNU\n");
-  printf("1. show the items in the Q\n");
-  printf("2. Enqueue an item\n");
-  printf("3. Dequeue an item\n");
-  printf("4. check if Q is full\n");
-  printf("5. chack if Q is empty\n");
-  printf("6. show pointer indexes\n");
-  printf("Please ur choice\n");
-  printf(">> ");
-  scanf("%c%*c", &choice);
+
+ int i = -1;
  
- switch(choice)
+printf("------------------\n");
+ 
+ for(i=-1; i<=rear; i++)
   {
-    case '0':        
-        printf("Goodbye\n");
-        exit(0);
-    break;
-
-  
-    case '1':
-          show(); 
-    break;
-    
-
-    case '2':
-         printf("insert a char\n");
-         scanf("%c%*c", &ch );
-         enQ(ch); 
-    break;
-
-
-    case '3':
-         deQ();
-    break;
-
-
-    case '4':
-         if(isFull() == true)
-           {
-             printf("Yes, the buffer is full\n");
-           }
-           else{
-                 printf("No the buffer is not full\n");
-               }
-    break;
-
-    case '5':
-          if(isEmpty() == true)
+      
+    if(i != rear)
+      {
+          if(i == -1)
             {
-               printf("Yes, the buffer is empty\n");
-            }else{
-                     printf("No, the buffer is not empty0");
-                 }
-    break;
-
-   
-    case '6':
-        Index();
-    break;
-         
-   default:    
-        printf("Entered a wrong charachter");  
-        goto loop;               
-    break;
-
-  } 
-
-}
-
-void Index(void)
-{
-
- int i = 0;
- 
- printf("rear  ");
- for(i=0; i<5; i++)
-  {
-    printf("%d ", rear);
+              printf("  ");
+            }
+          else
+            {
+              printf(" ");
+            }
+      }
+     else
+      {
+       printf("r");
+      }
   }  
 
-  printf("\nfront "); 
- for(i=0; i<5; i++)
-  {
-    printf("%d ", front);   
-  }
-  
+
+
+
+  printf("\n");
+ for(i=-1; i<QSIZE; i++)
+    {
+      printf("%d ", i);
+    }
   printf("\n");
 
-//------------------------------
 
  
-}
+ for(i=-1; i<=front; i++)
+  {
+    if(i != front)
+      {
+           
+          if(i == -1)
+            {
+              printf("  ");
+            }
+          else
+            {
+              printf(" ");
+            }
 
+      }
+     else
+      {
+       printf("f");
+      }
+  }  
 
-/*************************************************************/
-/*       Cool way to write MENU and callback functions       */
-
-struct menu{
-
-char *str;
-int (*handler)(void);
-
-};
-
-
-int callback_1(void);
-int callback_2(void);
-int callback_3(void);
-void Display_menu(void);
-
-
-struct menu main_menu[3] = {
-
-{"1. Leicester", callback_1 },
-{"2. Sunbury-on-Thames", callback_2},
-{"3. Persia", callback_3 }
-
-};
-
-
-int main(void)
-{
-
-char ch = '\0';
-
-
-Display_menu();
-
-printf("Pealse enter a character\n");
-scanf("%c", &ch);
-
-if(ch == '1')
-{
-  
-  main_menu[0].handler();
-  
-}
-
-else if(ch == '2')
-{
- 
- main_menu[1].handler();
+printf("\n---------------------\n");
 
 }
 
-else if(ch == '3')
-{
-  main_menu[2].handler();
-}
 
-
-
-
-return 0;
-}
-
-//------------------------------------------------------
-
-
-int callback_1(void)
-{
-  printf("I am the 1st 1st 1st callback function\n");
-  return 1;
-}
-
-int callback_2(void)
-{
- printf("I am the 2nd 2nd 2nd callback function\n");
- return 1;
-}
-
-int callback_3(void)
-{
- printf("I am the 3rd 3rd 3rd callback function\n");
- return 1;
-}
-
-void Display_menu(void)
+int  displayMenu(void)
 {
 
 int i = 0;
-for(i=0; i<3; i++) 
+for(i=0; i<7; i++) 
   {
     printf("%s\n", main_menu[i].str);
   }
 } 
 
+void processChoice(char *ptr)
+{
+  switch(*ptr)
+       {
+	 case '0':
+	    exitMenu();
+	 break;
+	 
+	 case '1':
+	    showQ();
+	 break;
 
+	 case '2':
+	    enQ();
+	 break;
 
+	 case '3':
+	    deQ();
+	 break;
+	   
+	 case '4':
+	    isEmpty();
+	 break;
 
+	 case '5':
+	    isFull();
+	  break;
 
+	 case '6':
+	    indexPointers();
+	  break;
+	 
+	 default:
 
+	 break;
+       }
 
-
-
-
-
-
-
-
-
+}
 
